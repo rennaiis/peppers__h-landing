@@ -1,0 +1,61 @@
+@use "@styles/base" as *;
+
+.rules {
+  @include content();
+  &__content{
+    @include options((
+      padding: (70px 0px 70px 0px, 15px 0 20px 0)
+    ))
+  }
+  &__bg{
+    background: linear-gradient(0deg, $RED 5%, $BLACK 76%);
+
+  }
+  &__title{
+    margin: 0;
+    @extend %TITLE;
+    
+    @include NOT-MOB{
+       align-self: flex-start;
+    }
+    @include NOT-DESKTOP{
+      text-align: center;
+    }    
+    @include options((
+      max-width: 950px
+    ))
+  };
+  &__caption{
+    @extend %BIG_TEXT;
+   
+    @include NOT-MOB{
+       align-self: flex-start;
+    }
+    @include options((
+      margin-top: (20px, 10px)
+    ))
+  }
+  &__cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+     @include options((
+      margin: (40px 0px 38px 0px, 16px 0 35px 0),
+      gap: (20px, 10px)
+    ));
+    @include NOT-DESKTOP{
+      grid-template-columns: 1fr
+    }
+  }
+  @mixin mod($mod) {
+    @include modifier("rules", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .rules_#{$mod} & {
+        @content;
+      }
+    }
+  }
+}

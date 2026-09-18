@@ -1,0 +1,16 @@
+@use "@styles/base" as *;
+
+.modalVideo {
+  @mixin mod($mod) {
+    @include modifier("modalVideo", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .modalVideo_#{$mod} & {
+        @content;
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@use "@styles/base" as *;
+
+.facts {
+  @include content();
+
+  &__content{
+    @include options((
+      padding: (90px 0 70px 0, 40px 0 20px 0)
+    ))
+  }
+  &__bg{
+    background: linear-gradient(0deg, $BLACK 0%, $RED 85%);
+
+  }
+  &__carousel{
+     @include options((
+      padding: (70px 0 0 0, 22px 0 0 0)
+    ));
+    width: 100%;
+    align-self: flex-start;
+    @include NOT-DESKTOP{
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+  }
+  &__title{
+    margin: 0;
+    @extend %TITLE;
+    align-self: start;
+    @include NOT-DESKTOP{
+      text-align: center;
+    }
+  }
+  &__arrows{
+    display: flex;
+    @include option(gap, 10px);
+    justify-content: center;
+    @include options((
+      gap: (10px),
+      margin: (46px 0 63px 0, 18px 0 33px 0)
+    ))
+
+  }
+
+  @mixin mod($mod) {
+    @include modifier("facts", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .facts_#{$mod} & {
+        @content;
+      }
+    }
+  }
+}

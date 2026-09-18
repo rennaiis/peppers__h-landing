@@ -1,0 +1,106 @@
+@use "@styles/base" as *;
+
+.footer {
+  @include content;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  &__content{
+    display: grid;
+    grid-template-columns: 0.45fr 0.95fr 2.5fr;
+    align-items: start;
+    @include options((
+      padding: (100px 0px 185px 0px, 90px 0 70px 0),
+      gap: (30px, 0px)
+    ));
+    @include NOT-DESKTOP{
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "logo"
+        "text"
+        "load"
+        "socials"
+    }
+  }
+  
+  &__logo{
+    @include options((
+      width: (180px, 113px),
+      height: (37px, 32px),
+      margin-bottom: (20px)
+    ));
+    &_mob{
+      @include NOT-MOB{
+        display: none;
+      }
+      @include NOT-DESKTOP{
+        grid-area: logo;
+      }
+      
+    };
+    &_desktop{
+      @include NOT-DESKTOP{
+        display: none;
+      }
+    }
+  }
+  &__socials{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include NOT-DESKTOP{
+      grid-area: socials;
+    }
+    @include option(margin-top, 0, 8px);
+    
+  }
+  &__load{
+    display: flex;
+    @include option(margin-top, 0, 105px);
+    @include NOT-DESKTOP{
+      grid-area: load;
+      flex-direction: row-reverse;
+    }
+    
+    @include options((
+      gap: (20px),
+    ))
+  }
+  &__socialLinks{
+    display: flex;
+    @include options((
+      gap: (13px, 10px)
+    ))
+  }
+  &__qr{
+    @include options((
+      width: (135px, 88px),
+    ));
+    img{
+      width: 100%;
+      height: 100%
+    };
+    flex-shrink: 0;
+  }
+  &__text{
+    @extend %FOOTER-SMALL;
+    text-align: justify;
+    opacity: 0.5;  
+    @include NOT-DESKTOP{
+      grid-area: text;
+    }
+    
+  }
+  &__how{
+    @extend %FOOTER-TEXT;
+    text-align: start;
+    @include option(margin-bottom, 21px)
+    
+  }
+  &__caption{
+    @extend %FOOTER-BOLD;
+    @include option(margin-bottom, 13px, 10px);
+    letter-spacing: 0.06em;
+  }
+}

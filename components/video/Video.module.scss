@@ -1,0 +1,60 @@
+@use "@styles/base" as *;
+
+.video {
+  @include content();
+  &__title{
+    @extend %TITLE;
+    @include options((
+      margin: (0 0 55px 0, 0 0 23px 0),
+      max-width: (1920px, 200px)
+    ));
+    @include NOT-DESKTOP{
+      text-align: center;
+    } 
+  }
+  &__content{
+    @include options((
+      padding: (70px 0px 62px 0px, 12px 0 0 0)
+    ))
+  }
+  &__bg{
+    background: linear-gradient(0deg, $BLACK 0%, $RED 54%);
+  }
+  &__video{
+    position: relative;
+    overflow: hidden;
+    @include options((
+      width: (1200px, 100%),
+      border-radius: (20px, 10px)
+    ));
+    img{
+      width: 100%;
+      height: 100%
+    }
+  }
+  &__pause{
+    position: absolute;
+    inset: 0;
+    &_hidden{
+      display: none;
+    }
+  }
+  &__button{
+    @include options((
+      margin: (60px 0 0 0, 30px 0 0 0)
+    ))
+  }
+  
+  @mixin mod($mod) {
+    @include modifier("video", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .video_#{$mod} & {
+        @content;
+      }
+    }
+  }
+}

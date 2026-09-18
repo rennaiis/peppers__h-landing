@@ -1,0 +1,38 @@
+@use "@styles/base" as *;
+
+.cards {
+
+  @include content();
+  &__content{
+    @include options((
+      gap: (60px,45px),
+      padding: (18px 0 80px 0, 30px 0 0 0)
+    ));
+  }
+  &__bg{
+    background: linear-gradient(0deg, $RED 7%, $BLACK 68%);
+  }
+  &__container{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    @include options((
+      gap: (20px, 10px)
+    ));
+    @include NOT-DESKTOP{
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+  }
+  @mixin mod($mod) {
+    @include modifier("cards", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .cards_#{$mod} & {
+        @content;
+      }
+    }
+  }
+}

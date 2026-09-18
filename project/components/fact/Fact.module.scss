@@ -1,0 +1,167 @@
+@use "@styles/base" as *;
+
+.fact {
+  @mixin mod($mod) {
+    @include modifier("fact", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .fact_#{$mod} & {
+        @content;
+      }
+    }
+  }
+  position: relative;
+  @include options((
+    border-radius: (20px, 20px),
+  ));
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  @include NOT-DESKTOP{
+    align-items: end;
+  };
+  &__content{
+    position: relative;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    @include options((
+      border-radius: (20px, 10px),
+      height: (583px, 169px),
+      padding: (50px 30px 30px, 18px 15px 20px),
+      gap: (8px, 2px)
+    ));
+  }
+   &__bg{
+    position: absolute;
+    overflow: hidden;
+    inset: 0;
+    background-color: $BLACK;
+    @include options((
+    border-radius: (20px, 10px)
+  ));
+  }
+  &__bgItem{
+    position: absolute;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    &_back{
+      width: 100%;
+      height: 100%;
+    }
+    @include mods('1'){
+      &_coin1{
+        @include options((
+          width: (360px, 149px),
+          top: (90px, 18px),
+          right: (150px, -30px)
+        ))
+      }
+      &_coin2{
+        @include options((
+          width: (100px, 68px),
+          bottom: (120px, 27px),
+          left: (-5px, 165px)
+        ))
+      }
+    }
+    @include mods('2'){
+      &_coin1{
+         @include options((
+            width: (160px, 74px),
+            bottom:(275px, 95px),
+            left: (-22px, 20px),
+        ))
+      }
+      &_coin2{
+         @include options((
+            width: (270px, 110px),
+            top:(50px, 35px),
+            right: (-70px, 60px),
+        ))
+      }
+      &_coin3{
+        @include options((
+            width: (108px, 50px),
+            bottom:(75px, 25px),
+            left: (95px, 118px),
+        ))
+      }
+      &_ticketRight{
+        @include options((
+            width: (250px, 138px),
+            bottom:(70px, -30px),
+            left: (-140px, -42px),
+             rotate: (9deg, -3deg)
+        ))
+      }
+      &_ticketLeft{
+        @include options((
+            width: (250px, 130px),
+            bottom:(100px, -50px),
+            right: (-80px, -45px),
+            rotate: (-13deg, 10deg)
+        ))
+      }
+
+    }
+    @include mods('3'){
+      &_coin1{
+         @include options((
+            width: (168px, 150px),
+            top:(-10px, 10px),
+            right: (-20px, -35px),
+        ))
+      }
+      &_coin2{
+         @include options((
+            width: (100px, 95px),
+            top:(180px, 63px),
+            right: (140px, 110px),
+        ))
+      }
+    }
+    @include mods('4'){
+      &_coin1{
+         @include options((
+            width: (192px, 100px),
+            top: (160px, 55px),
+            left: (20px, 170px),
+        ))
+      }
+      &_coin2{
+         @include options((
+            width: (96px, 150px),
+            bottom: (170px, 5px),
+            right: (30px, -30px),
+        ))
+      }
+
+    }
+  }
+
+
+  &__text{
+    @extend %FACT-TEXT;
+    margin: 0;
+  }
+  &__title{
+    @extend %FACT-TITLE;
+    color: $RED;
+    margin: 0
+  }
+  &__caption{
+    margin: 0;
+    @extend %FACT-CAPTION;
+    margin-top: auto
+
+  }
+  
+}

@@ -1,0 +1,345 @@
+@use "@styles/base" as *;
+$card-z: 0;
+.card {
+  @mixin mod($mod) {
+    @include modifier("card", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .card_#{$mod} & {
+        @content;
+      }
+    }
+  }
+  
+  @include NOT-MOB{
+    height: 100%;
+    &:hover{
+      .card__cover{
+        transform: translateY(-110%)
+      }
+    }
+  }
+  &__body{
+  position: relative;
+  height: 100%;
+  @include NOT-DESKTOP{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20%);
+    z-index: $card-z + 3;
+
+    .card_opened &{
+      position: absolute; 
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+}
+ 
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  @extend %CARD-DEFAULT;
+  &__content{
+    position: relative;
+    flex-direction: column;
+    @include options((
+      border-radius: (20px,10px),
+      padding: (0 50px 0 50px, 30px 35px 30px 35px)
+    ));
+    @include mod('prize'){
+      @include options((
+        padding: (66px 365px 29px 50px,30px 35px 30px 35px),
+      ));
+    };
+    @include mod('rules'){
+      @include options((
+        padding: (0 50px 0 50px, 30px 35px 271px 35px)
+      ));
+    };
+    @include mod('table'){
+      @include options((
+        padding: (34px 50px 30px 50px, 30px 35px 30px 35px)
+      ));
+    };
+    @include mods('rules', 'out'){
+      @include NOT-MOB{
+          height: 100%;
+      }
+      align-content: center;
+    }
+  }
+
+  &__bg{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $RED;
+    @include options((
+      border-radius: (20px,10px),
+    ));    
+  }
+  &__bgItem{
+    position: absolute;
+    img{
+      width: 100%;
+      height: 100%;
+    };
+    &_crown{
+      @include NOT-MOB{
+        rotate: -20deg
+      }
+      @include options((
+        width: (388px, 291px),
+        top: (-70px, 260px),
+        right: (0px, 100px),
+      ))
+    }
+    &_phone{
+      @include NOT-MOB{
+        display: none;
+      }
+      @include options((
+        width: 464.86px, 
+        top: 250px,
+        left: -60px
+      ))
+    }
+    &_trophy{
+      rotate: 15deg;
+      @include NOT-DESKTOP{
+        rotate: -15deg;
+      }
+      @include options((
+        width: (273px, 133px),
+        bottom: (-100px, 200px),
+        right: (50px, -50px)
+      ))
+    }
+  }
+  &__cover{
+    position: absolute;
+    inset: 0;
+    border-color: $WHITE;
+    border-style: solid;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: $card-z + 2;
+    @include options((
+      border-width: (1px),
+      border-radius: (20px, 8px),
+    ));
+    @include NOT_DESKTOP{
+      @include mod('opened'){
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-15px);
+      }
+      position: relative;
+    }
+   
+  };
+  &__coverBg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    @include options((
+      border-radius: (20px,8px)
+    ));
+    background-image: 
+      radial-gradient(
+        circle at 100% -50%, 
+        $RED 0%,
+        $OPACY 50%,
+      ),
+      radial-gradient(
+        circle at 0% 150%, 
+        $RED 0%,
+        $RED 15%,
+        $OPACY 70%
+      );
+  }
+  &__coverContent{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include options((
+      gap: (30px, 10px),
+    ));
+    @include NOT-DESKTOP{
+      @include mod('rules'){
+        @include options((
+          padding: (18px, 40px, 10px)
+        ))
+      };
+      @include mod('out'){
+        @include options((
+          padding: (32px 45px)
+        ))
+      };
+      @include mod('table'){
+        @include options((
+          padding: (20px 20px)
+        ))
+      };
+      @include mod('prize'){
+        @include options((
+          padding: (90px 85px)
+        ))
+      };
+    }
+    @include mod('rules'){
+      @include NOT-MOB{
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+  &_opened{
+    @include NOT_DESKTOP{
+    z-index: 5; 
+    overflow: visible;
+  }
+}
+  &__coverIcon{
+    flex-shrink: 0;
+    @include mods('rules'){
+      @include options((
+        width: (112px, 59px),
+        height: (73px, 39px)
+      ))
+    }
+    @include mods('prize'){
+      @include options((
+        width: (75px, 39px),
+        height: (74px, 38px)
+      ))
+    }
+    
+    @include mods('out'){
+      @include options((
+        width: (112px, 59px),
+        height: (73px, 39px)
+      ))
+    }
+    @include mods('table'){
+      @include options((
+        width: (79px, 38px),
+        height: (115px, 56px)
+      ))
+    }
+     
+     
+  }
+  &__coverTitle{
+    @include options((
+      font-size: (36px, 14px)
+    ));
+    text-transform: uppercase;
+    @include mods('rules', 'prize', 'out'){
+      @include option(max-width, 300px)
+    }
+  }
+  &__title{
+    margin: 0;
+    @extend %CARD-TITLE;
+    line-height: 1.24em;
+  }
+  &__text{
+    margin: 0;
+    @include mod('prize'){
+      line-height: 1.5em;
+      @include options((
+        margin: (33px 0 0px 0, 15px 0 0 0) 
+      ));
+       &::after{
+        content: ''; 
+        display: block;
+        width: 100%;
+        background-color: $WHITE;
+        @include options((
+          height: 2px,
+          margin: (33px 0 45px 0, 20px 0 20px 0) 
+        ))
+    }
+    }
+  }
+  &__boldText{
+    @extend %CARD-BOLD;
+    @include option(margin-top, 30px, 20px)
+    
+  }
+  &__ol li::marker{
+    color: $BLACK;
+    @extend %CARD-TITLE
+  }
+  &__ul{
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    li{
+      text-align: left;
+    }
+    @include options((
+      gap: (17px, 10px),
+      margin-bottom: (30px, 20px)
+    ));
+    @include NOT-DESKTOP{
+      flex-direction: column;
+    }
+  } 
+  &__listIcon{
+    @include options((
+      width: 16px,
+      height: 12px,
+      margin-right: (0px, 10px)
+    ));
+    @include NOT-MOB{
+      display: none;
+    }
+  }
+  &__fact{
+    display: flex;
+    justify-items: flex-start;
+    @include option(gap, 20px, 13px);
+  }
+  &__factText{
+    @include option(margin, 0 0 0 0, 10px 0 0 0)
+  }
+  &__factTitle{
+    margin: 0;
+  }
+  &__factIcon{
+    @include options((
+      width: (60px, 40px),
+      height: (60px, 40px),
+    ));
+    flex-shrink: 0;
+  }
+  &__factCaption{
+    @extend %CARD-THIN;
+    @include options((
+      margin-top: (45px, 164px)
+    ))
+  }
+  
+}

@@ -1,0 +1,40 @@
+@use "@styles/base" as *;
+
+.table {
+  @extend %TABLE-TEXT;
+  &__cell{
+    text-align: center;
+    @include options((
+      padding: (2px 10px, 5px)
+    ));
+    &_header{
+      @include option(max-width, 80px)
+    }
+    &_value{
+      @extend %TABLE-NUMS;
+      background-color: $BLACK;
+    }
+    &_prize{
+      @extend %TABLE-NUMS;
+      background-color: $WHITE;
+      color: $BLACK
+    }
+    &_red{
+      @extend %TABLE-NUMS;
+      background-color: $ORANGE;
+      color: $WHITE
+    }
+  }
+  @mixin mod($mod) {
+    @include modifier("table", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .table_#{$mod} & {
+        @content;
+      }
+    }
+  }
+}

@@ -1,0 +1,326 @@
+@use "@styles/base" as *;
+
+.customButton {
+  @mixin mod($mod) {
+    @include modifier("customButton", $mod) {
+      @content;
+    }
+  }
+
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .customButton_#{$mod} & {
+        @content;
+      }
+    }
+  }
+
+  $sh: 7px;
+  $sht: 7px;
+  $shm: 6px;
+
+  position: relative;
+  display: flex;
+
+  @include options(
+    (
+      width: auto,
+      min-width: 0,
+    )
+  );
+
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  max-width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  user-select: none;
+  --button-block-border-color: var(--button-text-color);
+  --button-path-color: var(--button-text-color);
+
+  &:disabled,
+  &_disabled {
+    pointer-events: none;
+    --button-text-color: rgba(155, 161, 173, 1);
+    --button-path-color: var(--custom-button-disabled-fill, var(--button-text-color));
+  }
+
+  &:active {
+    --button-text-color: rgba(255, 92, 76, 1);
+  }
+
+  &_dark {
+    --button-text-color: #{$TEXT};
+    &:active {
+      --button-text-color: rgba(59, 81, 123, 1);
+    }
+  }
+
+  &_base {
+    @include options(
+      (
+        width: (334px, 188px),
+        --button-block-padding: (19px, 12px),
+        --button-font-size: (20px, 11px),
+        --button-image-height: (36px, 19px),
+        --button-border-radius: (16px, 8px),
+      )
+    );
+    --button-block-border-color: none;
+    --button-image-width: none;
+    &:hover{
+       --button-block-bg-color: #{$RED};
+       --button-text-color: #{$WHITE};
+       --button-path-color: #{$WHITE};
+    }
+  }
+
+  &_red {
+    --button-block-bg-color: #{$RED};
+    --button-text-color: #{$WHITE};
+    &:hover{
+       --button-block-bg-color: #{$WHITE};
+       --button-text-color: #{$RED};
+       --button-path-color: #{$RED};
+    }
+  }
+  &_high{
+    @include options((
+    --button-block-padding: (25px, 14px)
+    ));
+  }
+  &_white {
+    --button-block-bg-color: #{$WHITE};
+    --button-text-color: #{$BLACK};
+    &:hover{
+       --button-block-bg-color: #{$BLACK};
+       --button-text-color: #{$WHITE};
+       --button-path-color: #{$WHITE};
+    }
+    
+  }
+  &_arrow{
+    --button-path-color: #{$WHITE};
+    --button-block-bg-color: transparent;
+    @include options((
+      --button-image-width: (144px, 144px),
+      --button-block-padding: (0px, 0px),
+      --button-image-height: (17px, 12px),
+    ));
+    opacity: 0.5;
+    &:hover{
+      opacity: 1;
+    };
+    @include NOT-DESKTOP{
+      display: none;
+    }
+    &_mobile{
+      @include NOT-MOB{
+        display: none;
+      }
+      @include NOT-DESKTOP{
+        display: flex;
+        @include options((
+        --button-image-width: (62px, 62px),
+        --button-block-padding: (0px, 0px),
+        --button-image-height: (17px, 15px),
+      ));
+      }
+    }
+  }
+  &_map{
+    --button-block-bg-color: transparent;
+    --button-text-color: #{$WHITE};
+    text-decoration: underline;
+    --text-transform: none;
+    --button-text-wrap: unset;
+    .customButton__text{
+      text-align: start;
+    }
+    @include options(
+      (
+        --button-font-size: (32px, 14px),
+        --button-image-height: (71px, 29px),
+        --button-image-width: (69px, 26px),
+      )
+    );
+    width: (1042px, 246px)
+  }
+  &_play{
+    --button-block-bg-color: transparent;
+    --button-path-color: #{$WHITE};
+    @include options(
+      (
+        --button-image-height: (109px, 29px),
+        --button-font-size: (32px, 14px),
+      )
+    );
+  }
+
+  &_app{
+    --button-block-bg-color: #{YELLOW};
+    --button-text-color: #{$BLACK};
+    --button-font-family: #{$FOOTER-ROBOTO};
+    --button-font-weight: 700;
+    --text-transform: none;
+    
+    @include options(
+      (
+        --button-image-height: (30px, 19px),
+        --button-image-width: (65px, 50px),
+        --button-font-size: (12px),
+        --button-block-padding: (10px 30px),
+        
+      )
+    );
+    
+
+  }
+
+  &_close {
+    position: absolute;
+    @include options(
+      (
+
+        top: (150px, 10px),
+        right: (50px, 10px),
+        width: (70px, 21px),
+        height: (70px, 21px),
+      )
+    );
+    --button-block-bg-color: transparent;
+  }
+
+  &_link {
+    @include options(
+      (
+        width: auto,
+        height: auto,
+        --button-image-font-size: (16px, 19px, 26px),
+        --button-font-size: (16px, 18px, 24px),
+        --button-block-grid-gap: (10px, 12px, 16px),
+      )
+    );
+    --button-image-width: 1em;
+    --button-image-height: 1em;
+    --button-text-color: #{$WHITE};
+    --button-font-weight: 500;
+    --button-block-bg-color: transparent;
+    --text-transform: none;
+    
+   
+  }
+
+  &_soc {
+    --button-path-color: #{$BLACK};
+    @include options(
+      (
+        width: (50px, 33px),
+        height: (50px, 33px),
+      )
+    );
+  }
+
+  &_socWs {
+    @include options(
+      (
+        width: (190px, 238px, 377px),
+        height: (24px, 34px, 55px),
+      )
+    );
+  }
+
+  &__block {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: var(--button-block-flex-direction, row);
+    border-radius: var(--button-border-radius, 10px);
+    justify-content: center;
+    align-items: center;
+    grid-gap: var(--button-block-grid-gap, 0);
+    padding: var(--button-block-padding, 0);
+    @include border($d: 2px, $t: 2px, $m: 2px);
+    border: none;
+    background-color: var(--button-block-bg-color, #{$WHITE});
+    transition: all 0.3s ease-in-out, opacity 0.3s ease-in-out, border-color 0.3s ease-in-out;
+
+    @include mods("link", "soc", "close") {
+      border: none;
+    }
+  }
+
+  &__text {
+    position: relative;
+    font-family: var(--button-font-family, #{$BASE-FONT});
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight, 800);
+    color: var(--button-text-color, #{$RED});
+    text-transform: var(--text-transform, uppercase);
+    transition: color 0.3s ease-in-out, width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    // white-space: var(--button-text-wrap, nowrap);
+    width: var(--button-text-width, 100%);
+    @include mod("nav") {
+      order: 1;
+      @include option(width, 0px);
+      overflow: hidden;
+      text-align: left;
+      opacity: 0;
+      transition: color 0.3s ease-in-out, width 0.3s ease-in-out 0.2s, opacity 0.3s ease-in-out 0s;
+    }
+
+    @include mod("navFull") {
+      @include option(width, 159px, 131px, 178px);
+      opacity: 1;
+      transition: color 0.3s ease-in-out, width 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0.2s;
+    }
+
+    @include mod("link") {
+      white-space: pre-wrap;
+    }
+  }
+
+  &__image {
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+    font-size: var(--button-image-font-size, 1em);
+    width: var(--button-image-width, 100%);
+    height: var(--button-image-height, 100%);
+    min-width: var(--button-image-min-width, auto);
+    flex-shrink: 0;
+    img,
+    svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      
+      path[fill] {
+        fill: var(--button-path-color, #{$RED});
+      }
+
+      path {
+        transition: fill 0.3s ease-in-out;
+      }
+    }
+
+    @include mod("nav") {
+      order: 2;
+    }
+  }
+
+  &__border {
+    @include shadow($sh: $sh, $sht: $sht, $shm: $shm);
+    background-color: var(--button-block-border-color, #{$RED});
+
+    @include mods("link", "soc", "close", "base", "red", "arrow", 'map', 'play', 'app') {
+      display: none;
+    }
+  }
+}

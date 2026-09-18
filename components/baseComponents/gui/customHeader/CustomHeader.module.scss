@@ -1,0 +1,80 @@
+@use "@styles/base" as *;
+
+.customHeader {
+  @mixin mod($mod) {
+    @include modifier("customHeader", $mod) {
+      @content;
+    }
+  }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: $TEXT;
+  z-index: $z-header;
+
+  &__block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    @include option(width, $DESIGN-W, $DESIGN-W-M, $DESIGN-W-T);
+    @include option(padding, 16px 75px, 24px 30px 24px, 41px 80px);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  &__logo {
+    position: relative;
+    @include option(width, 85px, 56px, 170px);
+    @include option(height, 35px, 26px, 78px);
+    z-index: 1;
+
+    a,
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    @include option(width, 32px, 32px, 58px);
+    @include option(height, 32px, 32px, 58px);
+    cursor: pointer;
+    z-index: 1;
+
+    p {
+      width: 100%;
+      @include option(height, 4px, 4px, 6px);
+      margin: 0;
+      background-color: $WHITE;
+      transform-origin: center left;
+    }
+  }
+
+  &__wrapper {
+    position: absolute;
+    top: 129px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 129px);
+    padding: 20px;
+    background-color: $TEXT;
+    //transform: translateX(101%);
+    transition: transform 0.3s;
+    cursor: pointer;
+
+    //@include mod("active") {
+    //  transform: translateX(0%);
+    //}
+  }
+
+  &__content {
+  }
+}

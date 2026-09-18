@@ -1,0 +1,240 @@
+@use "@styles/base" as *;
+
+.intro {
+
+  @include content($CONTENT-W, 266px);
+  &__bg{
+    background: linear-gradient(0deg, $BLACK 37%, $RED 85%);
+  }
+  &__content{
+    @include options((
+      padding: (76px 0 60px 0, 31px 0 31px 0)
+    ));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  };
+  &__header{
+    display: flex;
+    width: 100%;
+    @include NOT-DESKTOP{
+      flex-wrap: wrap; 
+      @include options((
+        gap: 37px,
+        row-gap: 45px
+      ));
+    }
+    @include NOT-MOB{
+      @include option(gap, 80px, 50px);
+    }
+  }
+  &__huntLogo{
+    @include options((
+      width: (195px, 110px),
+      height: (40px, 22px),
+      margin-top: (5px, 2px)
+    ));
+    
+  }
+  &__logo{
+    @include options((
+      width: (215px, 119px),
+      height: (44px, 24px)
+    ));
+    @include NOT-DESKTOP{
+      margin-left: auto;
+    }
+  }
+  &__date{
+    margin-left: auto;
+    text-align: right;
+    @include options((
+      margin-top: (10px, 0)
+    ));
+    @include NOT-DESKTOP{
+      margin-left: 0;
+      text-align: left;
+    }
+  }
+  &__caption{
+    @include options((
+      font-size: (28px, 12px)
+    ));
+    &_bold{
+      font-weight: $FW-BOLD
+    };
+    &_thin{
+      font-weight: $FW-LIGHT
+    }
+  }
+  &__topText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include option(margin, 520px 0 0 0, 285px 5px 0);
+    @include NOT-DESKTOP{
+      align-self: end;
+    }
+  }
+  &__bottomText{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    @include options((
+      margin: (140px 0 105px 0, 284px 0px 0px 0px)
+    ));
+    @include NOT-DESKTOP{
+      align-items:center;
+    }
+  }
+  &__string{
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0;
+    &_1{
+      @include options((
+        font-size: (45px, 16px)
+      ));
+      font-weight: $FW-MEDIUM; 
+    };
+    &_2{
+      @include options((
+        font-size: (90px, 32px),
+        letter-spacing: (-0.02em)
+      ));
+      font-weight: $FW-BOLD;
+      
+    };
+    &_3{
+      @include options((
+        font-size: (36px, 14px),
+        margin: (20px 0px 57px 0px, 19px 0 23px 0),
+      ));
+      font-weight: $FW-LIGHT
+    }
+    &_4{
+      @include options((
+        font-size: (28px, 12px),
+      ));
+      font-weight: $FW-MEDIUM;
+      @include NOT-DESKTOP{
+        text-transform:lowercase
+      }
+      letter-spacing: 0.01em;
+    }
+    &_5{
+      @include options((
+        font-size: (39.61px, 16px),
+        margin: (75px 0px 0px 0px, 33px 0 0 0),
+      ));
+      font-weight: $FW-MEDIUM;
+      
+    }
+    &_6{
+      @include options((
+        font-size: (79.22px, 27px),
+        margin: (5px 0px 0px 0px, 0px),
+      ));
+      font-weight: $FW-SEMI_BOLD;
+    }
+    &_7{
+      @include options((
+        font-size: (31.69px, 14px),
+        margin: (73px 0px 0px 0px, 13px 0 39px 0),
+      ));
+      font-weight: $FW-LIGHT
+    }
+  }
+  &__bg{
+    display: flex;
+    flex-direction: column;
+  }
+  &__bgItem{
+    &_bg{
+      @include glitch();
+      position: relative;
+      align-self: center;
+      @include options((
+        width: (1520px, 310px),
+        right: (40px, -25px),
+        top: (285px, 165px),
+      ));
+    }
+    &_man{
+      position: relative;
+      align-self: center;
+      @include options((
+        width: (510px, 266px),
+        bottom: (410px, 92px),
+        right: (20px, 10px)
+      ))
+    }
+    &_coins{
+      position: relative;
+      align-self: center;
+      @include options((
+        width: (720px, 310px),
+        bottom: (324px, 115px),
+        left: (450px, 0)
+      ));
+      
+    }
+    &_texture{
+      @include options((
+        width: (1520px, 260px),
+        right: (240px, 50px),
+        top: (285px, 165px),
+      ));
+      mix-blend-mode: multiply;
+      opacity: 1;
+    }
+    &_blackGr{
+      width: 100%;
+      height: (100%);
+      bottom: 0px;
+      background: linear-gradient(0deg, $BLACK 40%, $OPACY 70%);
+    }
+    &_blackGrSides{
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, $BLACK 0%, $OPACY 16%, $OPACY 83%, $BLACK 100%);
+    }
+    &_glowBlack{
+       @include options((
+        width: 600px,
+        height: 300px,
+        top: (-150px,-240px),
+        left: (-100,-50px)
+      ));
+      border-radius: 20%;
+      background: $BLACK;
+      filter:blur(70px);
+      opacity: 0.6;
+    }
+    &_glowRed{
+      @include options((
+        width: 180px,
+        height: 180px,
+        bottom: (170px, 260px),
+        right: (260px,70px)
+      ));
+      border-radius: 20%;
+      filter:blur(70px);
+      background: $RED;
+    }
+
+  }
+  @mixin mod($mod) {
+    @include modifier("intro", $mod) {
+      @content;
+    }
+  }
+  @mixin mods($mods...) {
+    @each $mod in $mods {
+      .intro_#{$mod} & {
+        @content;
+      }
+    }
+  }
+}
